@@ -3,7 +3,7 @@ $(git clone git@github.com:$GITHUBUSERNAME/$1.git)
 echo "__pycache__/\ndatabase.db" >> "$1/.gitignore" 
 mkdir "$1/templates" 
 echo "`cat <<EOF
-<h1># $1</h1>
+<h1>#$1 users</h1>
 {% for x in users | reverse %}
  <li>{{ x["first_name"]  }}</li>
 

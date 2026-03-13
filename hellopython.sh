@@ -6,13 +6,50 @@ __pycache__/
 database.db
 EOF`" > "$1/.gitignore" 
 mkdir "$1/templates" 
+mkdir "$1/static/css" -p
 echo "`cat <<EOF
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<title>{{ the_title }}</title>
+
+	<!-- note the special href for files in the Flask "static" folder -->
+	<link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+
+</head>
+<body>
+
+<div id="container">
+
+  <!-- Jinja directives: page contents will go between them -->
+  {% block content %}
+  {% endblock %}
+
+</div>
+
+</body>
+</html>
+EOF`" > "$1/templates/base.html" 
+echo "`cat <<EOF
+{% extends 'base.html' %}
+
+{% block content %}
 <h1># $1</h1>
 {% for x in users | reverse %}
  <li>{{ x["first_name"]  }}</li>
 
 {% endfor %} 
+{% endblock %}
 EOF`" > "$1/templates/hey.html" 
+echo "`cat <<EOF
+body {
+background:black;
+color:white;
+}
+EOF`" > "$1/static/css/main.css" 
 echo "`cat <<EOF
 import sqlite3
 from flask import g

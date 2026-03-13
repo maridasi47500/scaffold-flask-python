@@ -1,6 +1,10 @@
 export GITHUBUSERNAME="maridasi47500"
 $(git clone git@github.com:$GITHUBUSERNAME/$1.git)
 echo "__pycache__/\ndatabase.db" > "$1/.gitignore" 
+echo "`cat <<EOF
+__pycache__/
+database.db
+EOF`" > "$1/.gitignore" 
 mkdir "$1/templates" 
 echo "`cat <<EOF
 <h1># $1</h1>

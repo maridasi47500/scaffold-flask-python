@@ -1,14 +1,14 @@
 export GITHUBUSERNAME="maridasi47500"
 $(git clone git@github.com:$GITHUBUSERNAME/$1.git)
-echo "__pycache__/\ndatabase.db" >> "$1/.gitignore" 
+echo "__pycache__/\ndatabase.db" > "$1/.gitignore" 
 mkdir "$1/templates" 
 echo "`cat <<EOF
-<h1>#$1 users</h1>
+<h1># $1</h1>
 {% for x in users | reverse %}
  <li>{{ x["first_name"]  }}</li>
 
 {% endfor %} 
-EOF`" >> "$1/templates/hey.html" 
+EOF`" > "$1/templates/hey.html" 
 echo "`cat <<EOF
 import sqlite3
 from flask import g
@@ -34,7 +34,7 @@ def query_db(query, args=(), one=False):
 
 
 
-EOF`" >> "$1/yourappdb.py"
+EOF`" > "$1/yourappdb.py"
 echo "`cat <<EOF
 from flask import Flask, render_template
 from yourappdb import query_db, get_db
@@ -62,7 +62,7 @@ def hello_world():
     one_user = query_db('select * from contacts where first_name = ?',
                 [the_username], one=True)
     return render_template("hey.html", users=user, one_user=one_user)
-EOF`" >> "$1/app.py"
+EOF`" > "$1/app.py"
 echo "`cat <<EOF
 CREATE TABLE  IF NOT EXISTS contacts (
 	contact_id INTEGER PRIMARY KEY,
@@ -92,5 +92,6 @@ INSERT OR IGNORE INTO contacts (contact_id, first_name, last_name, email, phone)
 VALUES( '1', 'anonyme', 'noname', 'anonymous@email.fr', '+2653546434');
 INSERT OR IGNORE INTO contacts (contact_id, first_name, last_name, email, phone)
 VALUES( '2', 'anne onim', 'onim', 'anne.onim@email.com', '+86877779898');
-EOF`" >> "$1/schema.sql"
-$(cd $1/)
+EOF`" > "$1/schema.sql"
+alias proj="cd /home/$USER/$1"
+proj

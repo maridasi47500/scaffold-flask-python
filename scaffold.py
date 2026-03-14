@@ -52,9 +52,10 @@ addone="""@app.route("/add_one_{filename}", methods=["GET","POST"])
 def add_one_{filename}():
 
     if request.method == 'POST':
-        user = query_db('select * from {filename}')
+
         the_username = "anonyme"
         one_user = query_db("insert into {filename} {columns} values {values}",request.form)
+        user = query_db('select * from {filename}')
         return render_template("{filename}form.html", {filename}s=user, one_user=one_user, the_title="add new {filename}")
     user = query_db('select * from {filename}')
     one_user = query_db("select * from {filename} limit 1", one=True)

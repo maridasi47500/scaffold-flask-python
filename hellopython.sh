@@ -17,7 +17,7 @@ echo "`cat <<EOF
 	<title>{{ the_title }}</title>
 
 	<!-- note the special href for files in the Flask "static" folder -->
-	<link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+	<link rel="stylesheet" href="/static/css/main.css">
 
 </head>
 <body>
@@ -25,6 +25,8 @@ echo "`cat <<EOF
 <div id="container">
 
   <!-- Jinja directives: page contents will go between them -->
+  {% block liens %}
+  {% endblock %}
   {% block content %}
   {% endblock %}
 
@@ -77,7 +79,7 @@ def query_db(query, args=(), one=False):
 
 EOF`" > "$1/yourappdb.py"
 echo "`cat <<EOF
-from flask import Flask, render_template
+from flask import Flask, render_template, request
 from yourappdb import query_db, get_db
 from flask import g
 
@@ -102,7 +104,7 @@ def hello_world():
     the_username = "anonyme"
     one_user = query_db('select * from contacts where first_name = ?',
                 [the_username], one=True)
-    return render_template("hey.html", users=user, one_user=one_user)
+    return render_template("hey.html", users=user, one_user=one_user, the_title="my title")
 EOF`" > "$1/app.py"
 echo "`cat <<EOF
 CREATE TABLE  IF NOT EXISTS contacts (
@@ -134,5 +136,6 @@ VALUES( '1', 'anonyme', 'noname', 'anonymous@email.fr', '+2653546434');
 INSERT OR IGNORE INTO contacts (contact_id, first_name, last_name, email, phone)
 VALUES( '2', 'anne onim', 'onim', 'anne.onim@email.com', '+86877779898');
 EOF`" > "$1/schema.sql"
+cp scaffold.py /home/$USER/$1
 alias proj="cd /home/$USER/$1"
 proj

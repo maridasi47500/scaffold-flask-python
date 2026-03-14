@@ -69,7 +69,7 @@ with open("app.py", "a") as myfile:
 with open("schema.sql", "a") as myfile:
     myfile.write(mystr.format(filename=filename))
 with open("templates/hey.html", "a") as myfile:
-    myfile.write("{% block liens %}<a href=\"/\">bienvenue</a>"+"<a href=\"/add_one_{filename}\"> add one {filename}</a>".format(filename=filename)+"{% endblock %}")
+    myfile.write("<a href=\"/\">bienvenue</a>"+"<a href=\"/add_one_{filename}\"> add one {filename}</a>".format(filename=filename))
 
 
 with open("templates/"+filename+"form.html", "w") as myfile:

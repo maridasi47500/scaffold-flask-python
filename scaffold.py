@@ -71,7 +71,7 @@ with open("templates/hey.html", "a") as myfile:
     myfile.write("{% block liens %}"+"<a href=\"/add_one_{filename}\"> add one {filename}</a>".format(filename=filename)+"{% endblock %}")
 
 with open("templates/"+filename+"form.html", "w") as myfile:
-    myfile.write(formhtml.format(filename=filename)+"<div class=\"actions\"><input type=\"submit\"/></div></form>" + "{% for x in "+filename+" %}{{"+ "x[\""+items[2]+"\"] }}{% endfor %}")
+    myfile.write(formhtml.format(filename=filename)+"<div class=\"actions\"><input type=\"submit\"/></div></form>" + "{% for x in "+filename+"s %}{{"+ "x[\""+items[2]+"\"] }}{% endfor %}")
 
 
 

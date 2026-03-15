@@ -54,6 +54,9 @@ body {
 background:black;
 color:white;
 }
+a, a:visited, a:hover, a:link {
+color:white;
+}
 EOF`" > "$1/static/css/main.css" 
 echo "`cat <<EOF
 import sqlite3

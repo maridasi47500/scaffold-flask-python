@@ -45,6 +45,9 @@ echo "`cat <<EOF
 
 {% endfor %} 
 {% endblock %}
+{% block liens %}
+<a href="/">welcome</a>
+{% endblock %}
 EOF`" > "$1/templates/hey.html" 
 echo "`cat <<EOF
 body {
